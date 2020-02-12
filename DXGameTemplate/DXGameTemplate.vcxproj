@@ -158,6 +158,7 @@
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Structure.h" />
+    <ClInclude Include="tstring.h" />
     <ClInclude Include="XInput.h" />
     <ClInclude Include="WinMain.h" />
   </ItemGroup>
