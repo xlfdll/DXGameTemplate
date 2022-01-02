@@ -23,7 +23,7 @@ void UpdateGame()
 
 	d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 
-	if (d3ddev->BeginScene())
+    if (d3ddev->BeginScene() == D3D_OK)
 	{
 		// TODO: Render
 
