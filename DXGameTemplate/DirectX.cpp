@@ -143,7 +143,7 @@ void ShutdownDirectInput()
 	}
 }
 
-LPDIRECT3DSURFACE9 LoadDirect3DSurfaceFromFile(LPTSTR fileName)
+LPDIRECT3DSURFACE9 LoadDirect3DSurfaceFromFile(LPCTSTR fileName)
 {
 	LPDIRECT3DSURFACE9 surface = NULL;
 
@@ -202,7 +202,7 @@ void DrawDirect3DSurface(LPDIRECT3DSURFACE9 source, LPDIRECT3DSURFACE9 dest, LON
 	d3ddev->StretchRect(source, &rectSource, dest, &rectDest, D3DTEXF_NONE);
 }
 
-LPDIRECT3DTEXTURE9 LoadDirect3DTexture(LPTSTR fileName, D3DCOLOR transparentColor)
+LPDIRECT3DTEXTURE9 LoadDirect3DTexture(LPCTSTR fileName, D3DCOLOR transparentColor)
 {
 	LPDIRECT3DTEXTURE9 texture = NULL;
 
@@ -284,4 +284,19 @@ void DrawTextureFrame(LPDIRECT3DTEXTURE9 texture, int frame, float x, float y,
 	};
 
 	dxsprite->Draw(texture, &rect, NULL, NULL, drawColor);
+}
+
+void DrawTile(LPDIRECT3DSURFACE9 source, int tileNumber, int tileWidth, int tileHeight, int tileColumnCount,
+	LPDIRECT3DSURFACE9 dest, int x, int y)
+{
+	RECT rectSource;
+	
+	rectSource.left = (tileNumber % tileColumnCount) * tileWidth;
+	rectSource.top = (tileNumber / tileColumnCount) * tileHeight;
+	rectSource.right = rectSource.left + tileWidth;
+	rectSource.bottom = rectSource.top + tileHeight;
+
+    RECT rectDest = { x, y, x + tileWidth, y + tileHeight };
+
+	d3ddev->StretchRect(source, &rectSource, dest, &rectDest, D3DTEXF_NONE);
 }
